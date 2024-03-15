@@ -11,7 +11,7 @@ function setup() {
     for (let index = 0; index < qpoints; index++) {
         let point = [abs(floor(randomGaussian(0, windowWidth))), abs(floor(randomGaussian(0, windowHeight)))];
         points.push(point);
-        points[index].push((points[index][0] + points[index][1]) / 2)
+        points[index].push((points[index][0] + points[index][1]) / 2);
         movepoints.push(point);
     }
 
@@ -29,7 +29,7 @@ let linesize = 250;
 function draw() {
     clear();
 
-    fill(`rgba(252, 179, 76, 120)`);
+    fill("rgba(252, 179, 76, 120)");
     for (let i = 0; i < points.length; i++) {
         let point = points[i];
         noiseSeed(point[2]);
@@ -44,11 +44,11 @@ function draw() {
         movepoints[i][1] = y;
 
         // Venom lines
-        let pclose = movepoints.filter(innerpoint => dist(x, y, innerpoint[0], innerpoint[1]) <= linesize)
+        let pclose = movepoints.filter(innerpoint => dist(x, y, innerpoint[0], innerpoint[1]) <= linesize);
         pclose.forEach(innerpoint => {
             let d = dist(x, y, innerpoint[0], innerpoint[1]);
             stroke(`rgba(252, 179, 76, ${map(d, 0, linesize, 1, 0)})`);
-            strokeWeight(map(d, 0, linesize, 0, 10) * 2.5)
+            strokeWeight(map(d, 0, linesize, 0, 10) * 2.5);
             line(x, y, innerpoint[0], innerpoint[1]);
         });
     }
@@ -62,7 +62,7 @@ function windowResized() {
 
 function indexAnimation() {
     typeWriter("#name", "Bruno Ramirez", 0, 50, 100, () => {
-        document.querySelector("#aka-container").innerHTML = '<div class="flex flex-row justify-center"><span class="text-4xl">(&nbsp;</span><h3 class="text-center text-4xl" id="aka">Jamtycle</h3><span class="text-4xl">&nbsp;)</span></div>';
+        document.querySelector("#aka-container").innerHTML = "<div class=\"flex flex-row justify-center\"><span class=\"text-4xl\">(&nbsp;</span><h3 class=\"text-center text-4xl\" id=\"aka\">Jamtycle</h3><span class=\"text-4xl\">&nbsp;)</span></div>";
         typeWriter("#aka", "Jamtycle", 0, 50, 100, () => {
             typeWriter("#desc", "Frontend...", 0, 50, 300, () => {
                 reverseTypeWriter("#desc", 50, 300, () => {
@@ -94,7 +94,7 @@ function typeWriter(_element, _sentence, _n, _speed_min, _speed_max, _on_finish,
 }
 
 function reverseTypeWriter(_element, _speed_min, _speed_max, _on_finish, _on_finish_delay) {
-    _element = typeof (_element) === 'string' ? document.querySelector(_element) : _element;
+    _element = typeof (_element) === "string" ? document.querySelector(_element) : _element;
     if (_element.innerHTML.length <= 0) {
         if (_on_finish) setTimeout(_on_finish, _on_finish_delay);
         return;
@@ -105,7 +105,7 @@ function reverseTypeWriter(_element, _speed_min, _speed_max, _on_finish, _on_fin
 }
 
 function isDarkModeEnabled() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
 
@@ -150,7 +150,7 @@ function createBubbles(bubbleQuantity) {
 
         var progress_bar = container.parentElement;
         progress_bar.appendChild(percent_container);
-    })
+    });
 }
 
 
@@ -167,7 +167,7 @@ function scrollToSmooth(_id) {
         showElement("up");
         showElement("down");
     }
-    setTimeout(() => window.scrollTo({ top: element.offsetTop, behavior: 'smooth' }), 50);
+    setTimeout(() => window.scrollTo({ top: element.offsetTop, behavior: "smooth" }), 50);
 }
 
 function scrollUp() {
@@ -213,7 +213,7 @@ function removeClassToElement(_id, ..._class) {
 }
 
 function getTopElement() {
-    const elements = document.getElementsByTagName('*');
+    const elements = document.getElementsByTagName("*");
 
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
@@ -227,24 +227,24 @@ function getTopElement() {
 
 const projects_content = [
     {
-        id: 'dynamic-reports',
-        title: 'DYNAMIC REPORTS',
-        content: '<div><img class="h-auto max-w-full rounded-lg" src="./img/dynamic-full.png" alt="" /></div><div><img class="h-full max-w-full rounded-lg" src="./img/dynamic-data-1.png" alt="" /></div><div><img class="h-full max-w-full rounded-lg" src="./img/dynamic-data-2.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/dynamic-data-seeker.png" alt="" /></div>'
+        id: "dynamic-reports",
+        title: "DYNAMIC REPORTS",
+        content: "<div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/dynamic-full.png\" alt=\"\" /></div><div><img class=\"h-full max-w-full rounded-lg\" src=\"./img/dynamic-data-1.png\" alt=\"\" /></div><div><img class=\"h-full max-w-full rounded-lg\" src=\"./img/dynamic-data-2.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/dynamic-data-seeker.png\" alt=\"\" /></div>"
     },
     {
-        id: 'image-processing',
-        title: 'IMAGE PROCESSING',
-        content: '<div><img class="h-auto max-w-full rounded-lg" src="./img/images-1.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/images-2.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/images-3.png" alt="" /></div>'
+        id: "image-processing",
+        title: "IMAGE PROCESSING",
+        content: "<div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/images-1.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/images-2.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/images-3.png\" alt=\"\" /></div>"
     },
     {
-        id: 'desktop-manager',
-        title: 'DESKTOP APP MANAGER',
-        content: '<div><img class="h-auto max-w-full rounded-lg" src="./img/fito-updater.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/fito-updater-m1.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/fito-updater-opt.png" alt="" /></div>'
+        id: "desktop-manager",
+        title: "DESKTOP APP MANAGER",
+        content: "<div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fito-updater.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fito-updater-m1.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fito-updater-opt.png\" alt=\"\" /></div>"
     },
     {
-        id: 'fitodyna',
-        title: 'FITODYNA',
-        content: '<div><img class="h-auto max-w-full rounded-lg" src="./img/fitodyna-1.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/fitodyna-2.png" alt="" /></div><div><img class="h-auto max-w-full rounded-lg" src="./img/fitodyna-3.png" alt="" /></div>'
+        id: "fitodyna",
+        title: "FITODYNA",
+        content: "<div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fitodyna-1.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fitodyna-2.png\" alt=\"\" /></div><div><img class=\"h-auto max-w-full rounded-lg\" src=\"./img/fitodyna-3.png\" alt=\"\" /></div>"
     }
 ];
 
