@@ -1,0 +1,67 @@
+.animate-appears-and-bounce {
+    animation:
+        bounce 1s infinite,
+        alpha-appear 2s;
+}
+
+.animate-alpha-slow {
+    animation-name: alpha-appear;
+    animation-duration: 6s;
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+.animate-alpha {
+    animation-name: alpha-appear;
+    animation-duration: 3s;
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+.alpha-appear-fast {
+    animation-name: alpha-appear;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+.animate-alpha-disappear {
+    animation-name: alpha-disappear;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+.alpha-disappear-fast {
+    animation-name: alpha-disappear;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+
+@keyframes alpha-appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes alpha-disappear {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
