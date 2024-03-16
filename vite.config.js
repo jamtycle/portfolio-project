@@ -5,6 +5,6 @@ export default defineConfig({
     plugins: [solid()],
     build: {
         target: "esnext",
-        base: "https://jamtycle.github.io/portfolio-project/portfolio/"
     },
+    base: "https://jamtycle.github.io/portfolio-project/portfolio/"
 });
