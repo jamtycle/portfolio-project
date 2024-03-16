@@ -6,5 +6,5 @@ export default defineConfig({
     build: {
         target: "esnext",
     },
-    base: "https://jamtycle.github.io/portfolio-project/portfolio/"
+    base: "./"
 });
