@@ -42,7 +42,7 @@ export const ProjectsData = [
         card: {
             title: "DYNAMIC REPORTS",
             content: "Dynamic reporting system for agricultural data.",
-            imgSrc: "/img/dynamic-full.png",
+            imgSrc: "./img/dynamic-full.png",
             imgAlt: "Fully dynamic reports",
             types: ["Backend", "Frontend", "Database", "Desktop"],
         },
@@ -51,10 +51,10 @@ export const ProjectsData = [
             content:
                 "This project required a fully dynamic reporting system for agricultural data. A comprehensive report for Phenology data was required, and a powerful tool for data analysis was delivered by my software. The client was satisfied and an efficient agricultural management solution was the result.",
             carrousel: [
-                "/img/dynamic-3.png",
-                "/img/dynamic-1.png",
-                "/img/dynamic-2.png",
-                "/img/dynamic-full.png",
+                "./img/dynamic-3.png",
+                "./img/dynamic-1.png",
+                "./img/dynamic-2.png",
+                "./img/dynamic-full.png",
             ],
             techstack: [
                 {
@@ -77,7 +77,7 @@ export const ProjectsData = [
             title: "PLAGUE SPREAD PREDICTION",
             content:
                 "Using image processing & machine learning tecniques to predict plague spread in fields.",
-            imgSrc: "/img/images-1.png",
+            imgSrc: "./img/images-1.png",
             imgAlt: "Image processing",
             types: ["IA", "Backend", "Frontend"],
         },
@@ -86,9 +86,9 @@ export const ProjectsData = [
             content:
                 "I utilized Machine Learning techniques to develop a RESTful API that transforms raw data into images, which can predict possible plague spread in fields. This tool provides a comprehensive solution for predicting and preventing agricultural plagues, ultimately resulting in better management and increased crop yield.",
             carrousel: [
-                "/img/images-1.png",
-                "/img/images-2.png",
-                "/img/images-3.png",
+                "./img/images-1.png",
+                "./img/images-2.png",
+                "./img/images-3.png",
             ],
             techstack: [
                 {
@@ -106,7 +106,7 @@ export const ProjectsData = [
         card: {
             title: "DESKTOP APP MANAGER",
             content: "Desktop app manager for Agrosoft's applications.",
-            imgSrc: "/img/fito-updater.png",
+            imgSrc: "./img/fito-updater.png",
             imgAlt: "Desktop app manager",
             types: ["Database", "Backend", "Frontend", "Web", "Desktop"],
         },
@@ -115,9 +115,9 @@ export const ProjectsData = [
             content:
                 "This app manager allows users to download and install all necessary desktop applications and maintains them up-to-date automatically. With this app manager, Agrosoft can streamline their application management process and provide users with a more efficient and user-friendly experience.",
             carrousel: [
-                "/img/fito-updater.png",
-                "/img/fito-updater-m1.png",
-                "/img/fito-updater-opt.png",
+                "./img/fito-updater.png",
+                "./img/fito-updater-m1.png",
+                "./img/fito-updater-opt.png",
             ],
             techstack: [
                 {
@@ -140,7 +140,7 @@ export const ProjectsData = [
             title: "FITODYNA",
             content:
                 "A flexible and scalable database model for agricultural data.",
-            imgSrc: "/img/fitodyna-1.png",
+            imgSrc: "./img/fitodyna-1.png",
             imgAlt: "Fitodyna",
             types: ["Database", "Backend", "Frontend", "Desktop"],
         },
@@ -149,9 +149,9 @@ export const ProjectsData = [
             content:
                 "The challenge in this project was to develop a database model that could accommodate any type of agriculture form, making it possible to use a single database model for multiple applications. Our team successfully developed a flexible database model that meets this requirement, providing a comprehensive solution for agricultural data management.",
             carrousel: [
-                "/img/fitodyna-2.png",
-                "/img/fitodyna-1.png",
-                "/img/fitodyna-3.png",
+                "./img/fitodyna-2.png",
+                "./img/fitodyna-1.png",
+                "./img/fitodyna-3.png",
             ],
             techstack: [
                 {
@@ -174,7 +174,7 @@ export const ProjectsData = [
             title: "AI IMAGE RECOGNITION",
             content:
                 "A tool that can recognize and count the amount of grape berries in a photo.",
-            imgSrc: "/img/conteo-ia.png",
+            imgSrc: "./img/conteo-ia.png",
             imgAlt: "conteo-ia",
             types: ["IA", "Backend", "Frontend", "Web"],
         },
@@ -183,9 +183,9 @@ export const ProjectsData = [
             content:
                 "For this project, the client required a tool that could recognize and count the amount of grape berries in a photo. I developed an AI model that can fit the requirement and integrated into a web application.",
             carrousel: [
-                "/img/conteo-ia-1.jpg",
-                "/img/conteo-ia-2.png",
-                "/img/conteo-ia.png",
+                "./img/conteo-ia-1.jpg",
+                "./img/conteo-ia-2.png",
+                "./img/conteo-ia.png",
             ],
             techstack: [
                 {
