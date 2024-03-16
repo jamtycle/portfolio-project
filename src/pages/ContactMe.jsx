@@ -1,13 +1,22 @@
 import {
+    HiOutlineAtSymbol,
     HiOutlineDevicePhoneMobile,
+    HiOutlineEnvelope,
+    HiOutlineIdentification,
     HiOutlineMapPin,
     HiOutlineNewspaper,
 } from "solid-icons/hi";
 import { FiGithub } from "solid-icons/fi";
 
-export default function ContactMe() {
+/**
+ * @param {Object} props
+ * @param {import("solid-js").Ref<HTMLDivElement>} props.ref
+ * @returns
+ */
+export default function ContactMe(props) {
     return (
         <div
+            ref={props.ref}
             class="flex h-screen w-full select-none flex-col items-center justify-center gap-12"
             id="contact"
         >
@@ -15,7 +24,7 @@ export default function ContactMe() {
                 CONTACT ME
             </h3>
             <div
-                class="flex h-3/5 w-3/5 flex-col items-center gap-10"
+                class="flex h-3/5 w-3/5 flex-col items-center"
                 data-aos="fade-up-right"
             >
                 <IconRow />
@@ -27,12 +36,12 @@ export default function ContactMe() {
 
 function IconRow() {
     return (
-        <div class="grid grid-cols-4">
+        <div class="grid max-w-lg grid-cols-4">
             <div
-                class="tooltip flex flex-col items-center justify-between"
+                class="link-primary tooltip flex flex-col items-center hover:text-white"
                 data-tip="Living the dream 🇨🇦"
             >
-                <HiOutlineMapPin class="h-24 w-24" />
+                <HiOutlineMapPin class="h-14 w-14" />
                 <p class="self-end text-2xl font-semibold">Toronto, Canada</p>
             </div>
             <div
@@ -40,31 +49,29 @@ function IconRow() {
                 data-tip="Get my resume for free! (this one time 😉)"
             >
                 <a
-                    class="flex flex-col items-center justify-between hover:text-primary"
+                    class="link-primary flex flex-col items-center hover:text-white"
                     href="./pdf/bruno-ramirez-resume.pdf"
-                    data-tip="resume-tooltip"
                     target="_blank"
                 >
-                    <HiOutlineNewspaper class="h-24 w-24" />
+                    <HiOutlineNewspaper class="h-14 w-14" />
                     <p class="text-2xl font-semibold">Resume</p>
                 </a>
             </div>
             <div class="tooltip" data-tip="Check my repos 😳">
                 <a
-                    class="flex flex-col items-center justify-between hover:text-primary"
+                    class="link-primary flex flex-col items-center hover:text-white"
                     href="https://github.com/jamtycle"
                     target="_blank"
-                    data-tip="github-tooltip"
                 >
-                    <FiGithub class="h-24 w-24 py-2" />
+                    <FiGithub class="h-14 w-14 py-2" />
                     <p class="text-2xl font-semibold">Github</p>
                 </a>
             </div>
             <div
-                class="tooltip flex flex-col items-center justify-end"
+                class="link-primary tooltip flex flex-col items-center hover:text-white"
                 data-tip="Call me maybe 🤙"
             >
-                <HiOutlineDevicePhoneMobile class="h-24 w-24 py-2" />
+                <HiOutlineDevicePhoneMobile class="h-14 w-14 py-2" />
                 <p class="text-xl font-bold">(647) 994-0631</p>
             </div>
         </div>
@@ -79,30 +86,40 @@ function ContactForm() {
         >
             <div class="flex w-full flex-col gap-4">
                 <div class="join">
-                    <input
-                        class="input join-item input-bordered w-full max-w-xs"
-                        id="grid-first-name"
-                        type="text"
-                        placeholder="First Name"
-                    />
-                    <input
-                        class="input join-item input-bordered w-full max-w-xs"
-                        id="grid-last-name"
-                        type="text"
-                        placeholder="Last Name"
-                    />
+                    <label class="input join-item input-bordered flex items-center gap-2">
+                        <HiOutlineIdentification class="h-fit" />
+                        <input
+                            type="text"
+                            id="first-name"
+                            class="grow"
+                            placeholder="First Name"
+                        />
+                    </label>
+                    <label class="input join-item input-bordered flex items-center gap-2">
+                        <HiOutlineIdentification class="h-fit" />
+                        <input
+                            type="text"
+                            id="last-name"
+                            class="grow"
+                            placeholder="Last Name"
+                        />
+                    </label>
                 </div>
                 <div class="w-full">
-                    <input
-                        class="input input-bordered w-full"
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                    />
+                    <label class="input input-bordered flex items-center gap-2">
+                        <HiOutlineAtSymbol class="h-fit" />
+                        <input
+                            type="email"
+                            id="email"
+                            class="grow"
+                            placeholder="Email"
+                        />
+                    </label>
                 </div>
-                <div class="flex h-32 flex-col">
+                <div class="relative flex h-32 flex-col">
+                    <HiOutlineEnvelope class="absolute left-[1rem] top-[1rem] h-fit" />
                     <textarea
-                        class="textarea textarea-bordered h-full"
+                        class="textarea textarea-bordered h-full pl-[2.4rem]"
                         id="message"
                         placeholder="Message"
                     />

@@ -1,39 +1,57 @@
-import { Show, createSignal, For, onMount } from "solid-js";
+import { Show, createSignal, For, onMount, createEffect } from "solid-js";
 import { MoreProjectsData, ProjectsData } from "../data/Projects";
 import {
     HiOutlineFolderPlus,
     HiOutlineRectangleStack,
     HiOutlineDocumentText,
 } from "solid-icons/hi";
+import { BsArrow90degDown } from "solid-icons/bs";
+// import { RiArrowsCornerLeftDownFill } from "solid-icons/ri";
 import BaseModal from "../components/BaseModal";
 
-export default function Projects() {
-    /**
-     * @type {HTMLDialogElement}
-     */
+/**
+ * @param {Object} props
+ * @param {import("solid-js").Ref<HTMLDivElement>} props.ref
+ * @param {import("solid-js").Accessor<number>} props.targetIndex
+ * @returns
+ */
+export default function Projects(props) {
+    /** @type {HTMLDialogElement} */
     let project_dialog;
-    /**
-     * @type {HTMLDialogElement}
-     */
+    /** @type {HTMLDialogElement} */
     let more_projects_dialog;
-    /**
-     * @type {[import("solid-js").Signal<import("../data/Projects").ProjectModal>, import("solid-js").Setter<import("../data/Projects").ProjectModal>]}
-     */
+    /** @type {[import("solid-js").Signal<import("../data/Projects").ProjectModal | false>, import("solid-js").Setter<import("../data/Projects").ProjectModal>]} */
     const [modalProject, setModalProject] = createSignal(false);
+    /** @type {[import("solid-js").Signal<boolean>, import("solid-js").Setter<boolean>]} */
+    const [showHelp, setShowHelp] = createSignal(false);
 
-    /**
-     * @param {import("../data/Projects").ProjectModal} _project
-     */
+    /** @param {import("../data/Projects").ProjectModal} _project */
     const openModal = (_project) => {
         setModalProject(_project);
         project_dialog.showModal();
     };
 
+    createEffect(() => {
+        if (props.targetIndex() !== 2) return;
+        setTimeout(() => {
+            setShowHelp(true);
+            setTimeout(() => setShowHelp(false), 12000);
+        }, 8000);
+    });
+
     return (
         <artice
-            class="flex h-screen w-full select-none flex-col items-center justify-center align-middle"
+            ref={props.ref}
+            class="relative flex h-screen w-full select-none flex-col items-center justify-center align-middle"
             id="projects"
         >
+            <Show when={showHelp()}>
+                <div class="animate-appears-and-bounce absolute right-1/4 top-52 flex">
+                    <BsArrow90degDown class="pt-3 text-6xl text-white" />
+                    <p class="text-2xl">Hover here!</p>
+                </div>
+            </Show>
+
             <ProjectModal ref={project_dialog} modalProject={modalProject()} />
             <MoreProjectsModal
                 ref={more_projects_dialog}
@@ -77,6 +95,7 @@ export default function Projects() {
  * @param {string} props.content
  * @param {string} props.imgSrc
  * @param {string} props.imgAlt
+ * @param {string[]} props.types
  * @param {() => void} props.onMoreClick
  * @returns
  */
@@ -113,6 +132,15 @@ function ProjectCard(props) {
                     <p class="text-left text-lg font-semibold leading-tight text-white">
                         {props.content}
                     </p>
+                    <div class="w-full flex gap-2">
+                        <For each={props.types}>
+                            {(type) => (
+                                <div class="badge badge-primary">
+                                    {type}
+                                </div>
+                            )}
+                        </For>
+                    </div>
                     <div class="card-actions justify-end">
                         <button
                             class="btn btn-primary btn-block text-lg uppercase"
@@ -163,7 +191,7 @@ function ProjectModal(props) {
             <Show when={props.modalProject}>
                 <div class="flex gap-10">
                     <div class="w-5/12">
-                        <div class="carousel w-full">
+                        <div class="carousel w-full gap-2">
                             <For each={props.modalProject.carrousel}>
                                 {(imgSrc, i) => (
                                     <div
@@ -265,7 +293,7 @@ function MoreProjectsModal(props) {
             history.pushState(
                 "",
                 document.title,
-                window.location.pathname + "#projects" + window.location.search,
+                window.location.pathname + window.location.search,
             );
         });
     });
@@ -284,9 +312,20 @@ function MoreProjectsModal(props) {
                         {(info, i) => (
                             <div id={`item${i()}`} class="carousel-item w-full">
                                 <div>
-                                    <h3 class="text-3xl font-bold">
-                                        {info.name}
-                                    </h3>
+                                    <div class="flex gap-5">
+                                        <h3 class="text-3xl font-bold">
+                                            {info.name}
+                                        </h3>
+                                        <div class="flex items-center justify-center gap-2">
+                                            <For each={info.types}>
+                                                {(type) => (
+                                                    <div class="badge badge-primary badge-outline">
+                                                        {type}
+                                                    </div>
+                                                )}
+                                            </For>
+                                        </div>
+                                    </div>
                                     <div class="divider my-2 py-0" />
                                     <div class="grid grid-cols-2 gap-8">
                                         <Show when={info.techstack}>

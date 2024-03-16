@@ -4,6 +4,7 @@
  *  content: string,
  *  imgSrc: string,
  *  imgAlt: string,
+ *  types: ProjectTypes[],
  * }} ProjectCard
  *
  * @typedef {{
@@ -29,7 +30,7 @@
  *  name: string,
  *  description: string,
  *  techstack: TechStack[],
- *  type: ProjectTypes[]
+ *  types: ProjectTypes[]
  * }} ExtraProject
  */
 
@@ -43,6 +44,7 @@ export const ProjectsData = [
             content: "Dynamic reporting system for agricultural data.",
             imgSrc: "/img/dynamic-full.png",
             imgAlt: "Fully dynamic reports",
+            types: ["Backend", "Frontend", "Database", "Desktop"],
         },
         modal: {
             title: "DYNAMIC REPORTS",
@@ -77,6 +79,7 @@ export const ProjectsData = [
                 "Using image processing & machine learning tecniques to predict plague spread in fields.",
             imgSrc: "/img/images-1.png",
             imgAlt: "Image processing",
+            types: ["IA", "Backend", "Frontend"],
         },
         modal: {
             title: "PLAGUE SPREAD PREDICTION",
@@ -105,6 +108,7 @@ export const ProjectsData = [
             content: "Desktop app manager for Agrosoft's applications.",
             imgSrc: "/img/fito-updater.png",
             imgAlt: "Desktop app manager",
+            types: ["Database", "Backend", "Frontend", "Web", "Desktop"],
         },
         modal: {
             title: "DESKTOP APP MANAGER",
@@ -138,6 +142,7 @@ export const ProjectsData = [
                 "A flexible and scalable database model for agricultural data.",
             imgSrc: "/img/fitodyna-1.png",
             imgAlt: "Fitodyna",
+            types: ["Database", "Backend", "Frontend", "Desktop"],
         },
         modal: {
             title: "FITODYNA",
@@ -171,6 +176,7 @@ export const ProjectsData = [
                 "A tool that can recognize and count the amount of grape berries in a photo.",
             imgSrc: "/img/conteo-ia.png",
             imgAlt: "conteo-ia",
+            types: ["IA", "Backend", "Frontend", "Web"],
         },
         modal: {
             title: "AI IMAGE RECOGNITION",
@@ -221,7 +227,7 @@ export const MoreProjectsData = [
                 techs: ["React", "React Native", "TailwindCSS"],
             },
         ],
-        type: ["Web", "Mobile", "Backend", "Frontend", "Database"],
+        types: ["Web", "Mobile", "Backend", "Frontend", "Database"],
     },
     {
         name: "Automotive Shop App",
@@ -245,7 +251,7 @@ export const MoreProjectsData = [
                 techs: ["React", "TailwindCSS"],
             },
         ],
-        type: ["Web", "Backend", "Frontend", "Database"],
+        types: ["Web", "Backend", "Frontend", "Database"],
     },
     {
         name: "Decompressor",
@@ -265,7 +271,7 @@ export const MoreProjectsData = [
                 techs: ["C#", "Console App"],
             },
         ],
-        type: ["Console", "Backend", "Database"],
+        types: ["Console", "Backend", "Database"],
     },
     {
         name: "SQL Server Connector",
@@ -277,7 +283,7 @@ export const MoreProjectsData = [
                 techs: ["C#"],
             },
         ],
-        type: ["Code Library", "Backend"],
+        types: ["Code Library", "Backend"],
     },
     {
         name: "Automatic Email Sender",
@@ -297,7 +303,7 @@ export const MoreProjectsData = [
                 techs: ["C#", "Windows Service"],
             },
         ],
-        type: ["Backend", "Database"],
+        types: ["Backend", "Database"],
     },
     {
         name: "And much more...",

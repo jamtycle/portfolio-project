@@ -1,4 +1,7 @@
-function indexAnimation() {
+/**
+ * @param {() => void} _on_finish
+ */
+function indexAnimation(_on_finish) {
     typeWriter(
         "#name",
         "Bruno Ramirez",
@@ -64,6 +67,7 @@ function indexAnimation() {
                                                                         50,
                                                                         50,
                                                                         () => {
+                                                                            _on_finish();
                                                                             // document
                                                                             //     .querySelector(
                                                                             //         "#more",
