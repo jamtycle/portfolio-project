@@ -35,7 +35,7 @@ export default function AboutMe(props) {
                             <FaSolidQuoteLeft class="absolute -left-14 top-1 h-12 w-12" />
                             Scientists are the ones who ought to guide major
                             {"\n"}
-                            decisions, with the help of macines.
+                            decisions, with the help of machines.
                             <FaSolidQuoteRight class="absolute -right-14 top-1 h-12 w-12" />
                         </p>
                         <p class="w-full text-right font-semibold text-white">
