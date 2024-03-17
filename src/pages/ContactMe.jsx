@@ -98,6 +98,13 @@ function ContactForm() {
         equals: false,
     });
 
+    const cleanForm = () => {
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setMessage("");
+    };
+
     /**
      * @param {SubmitEvent} e
      */
@@ -111,7 +118,6 @@ function ContactForm() {
         };
 
         setMessages([]);
-        setSent(false);
 
         if (!info.firstName || !info.lastName) {
             setMessages((prev) => [...prev, "First and last name is required"]);
@@ -146,6 +152,7 @@ function ContactForm() {
                 console.log("Email sended successfully!");
                 setSending(false);
                 setSent(true);
+                cleanForm();
             })
             .catch((ex) => {
                 console.error(ex);
@@ -224,7 +231,7 @@ function ContactForm() {
                 <button
                     class="btn btn-primary btn-block tooltip-bottom tooltip-success text-lg uppercase"
                     classList={{
-                        "btn-disabled": sending(),
+                        "btn-disabled": sending() || sent(),
                         tooltip: sent(),
                         "tooltip-open": sent(),
                     }}
