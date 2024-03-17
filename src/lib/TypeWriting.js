@@ -11,12 +11,12 @@ function indexAnimation(_on_finish) {
         () => {
             document.querySelector("#aka-container").innerHTML =
                 `<div class="flex flex-row justify-center">
-            <span class="text-4xl">(&nbsp;</span>
-            <h3 class="text-center text-4xl" id="aka">
-                Jamtycle
-            </h3>
-            <span class="text-4xl">&nbsp;)</span>
-        </div>`;
+                    <span class="text-2xl">(&nbsp;</span>
+                    <h3 class="text-center text-2xl" id="aka">
+                        Jamtycle
+                    </h3>
+                    <span class="text-2xl">&nbsp;)</span>
+                </div>`;
             typeWriter(
                 "#aka",
                 "Jamtycle",

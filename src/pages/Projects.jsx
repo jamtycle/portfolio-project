@@ -1,13 +1,23 @@
-import { Show, createSignal, For, onMount, createEffect } from "solid-js";
+import { Show, createSignal, For, onMount, createEffect, on } from "solid-js";
 import { MoreProjectsData, ProjectsData } from "../data/Projects";
 import {
     HiOutlineFolderPlus,
     HiOutlineRectangleStack,
     HiOutlineDocumentText,
 } from "solid-icons/hi";
+import { AiOutlineTrophy } from "solid-icons/ai";
 import { BsArrow90degDown } from "solid-icons/bs";
-// import { RiArrowsCornerLeftDownFill } from "solid-icons/ri";
 import BaseModal from "../components/BaseModal";
+
+const type_tags = [
+    "Backend",
+    "Frontend",
+    "Database",
+    "IA",
+    "Desktop",
+    "Web",
+    "Academic",
+].sort();
 
 /**
  * @param {Object} props
@@ -25,6 +35,15 @@ export default function Projects(props) {
     /** @type {[import("solid-js").Signal<boolean>, import("solid-js").Setter<boolean>]} */
     const [showHelp, setShowHelp] = createSignal(false);
 
+    const [easterEggClicks, setEasterEggClicks] = createSignal(0);
+    const [eEToolTip, setEETooltip] = createSignal("");
+
+    const [filter, setFilter] = createSignal([], { equals: false });
+    const [projectData, setProjectData] = createSignal(
+        ProjectsData.slice(0, 5),
+        { equals: false },
+    );
+
     /** @param {import("../data/Projects").ProjectModal} _project */
     const openModal = (_project) => {
         setModalProject(_project);
@@ -39,18 +58,62 @@ export default function Projects(props) {
         }, 8000);
     });
 
+    createEffect(
+        on(
+            () => easterEggClicks(),
+            (clicks) => {
+                if (clicks > 0 && clicks <= 10) {
+                    setEETooltip("👀");
+                }
+                if (clicks > 10 && clicks <= 20) {
+                    setEETooltip("🤨");
+                } else if (clicks > 20) {
+                    setEETooltip("You spin my head right round, right round");
+                }
+            },
+            { defer: true },
+        ),
+    );
+
+    createEffect(
+        on(
+            () => filter(),
+            (info) => {
+                if (!info || info.length === 0) {
+                    setProjectData(ProjectsData.slice(0, 5));
+                    return;
+                }
+
+                setProjectData(
+                    ProjectsData.filter((project) =>
+                        info.some((t) => project.card.types.includes(t)),
+                    ).slice(0, 5),
+                );
+            },
+            { defer: true },
+        ),
+    );
+
     return (
         <artice
             ref={props.ref}
-            class="relative flex h-screen w-full select-none flex-col items-center justify-center align-middle"
+            class="relative flex h-screen w-full select-none flex-col items-center justify-center gap-9 align-middle"
             id="projects"
         >
-            <Show when={showHelp()}>
-                <div class="animate-appears-and-bounce absolute right-1/4 top-52 flex">
-                    <BsArrow90degDown class="pt-3 text-6xl text-white" />
-                    <p class="text-2xl">Hover here!</p>
-                </div>
-            </Show>
+            <div
+                class="toast toast-start toast-top"
+                onClick={() => setEasterEggClicks(0)}
+            >
+                <Show when={easterEggClicks() >= 20}>
+                    <div class="alert border-2 border-primary bg-base-300 text-white hover:bg-base-100">
+                        <AiOutlineTrophy class="h-10 w-10" />
+                        <div class="flex flex-col">
+                            <span>Archievement unlocked</span>
+                            <span>You make the project spin! 😵</span>
+                        </div>
+                    </div>
+                </Show>
+            </div>
 
             <ProjectModal ref={project_dialog} modalProject={modalProject()} />
             <MoreProjectsModal
@@ -59,19 +122,71 @@ export default function Projects(props) {
             />
 
             <h3
-                class="col-span-2 col-start-1 row-start-1 mb-9 text-center text-6xl font-bold"
-                data-aos="fade-down"
+                class="col-span-2 col-start-1 row-start-1 text-center text-6xl font-bold"
+                onClick={() => setEasterEggClicks(easterEggClicks() + 1)}
+                data-tip={eEToolTip()}
+                classList={{
+                    tooltip: easterEggClicks() > 0,
+                    "tooltip-secondary": easterEggClicks() >= 20,
+                    btn: easterEggClicks() > 0,
+                    "btn-ghost": easterEggClicks() > 0,
+                    "btn-lg": easterEggClicks() > 0,
+                }}
             >
                 PROJECTS
             </h3>
+            <div class="flex gap-3">
+                <For each={type_tags}>
+                    {(tag) => {
+                        const [tagShow, setTagShow] = createSignal(true);
+
+                        return (
+                            <div
+                                class="badge badge-primary badge-lg cursor-pointer"
+                                classList={{
+                                    "badge-outline": tagShow(),
+                                    "animate-pulse":
+                                        tagShow() && easterEggClicks() <= 20,
+                                    "animate-spin":
+                                        tagShow() && easterEggClicks() > 20,
+                                }}
+                                onClick={() => {
+                                    setTagShow(!tagShow());
+                                    setFilter(
+                                        tagShow()
+                                            ? filter().filter((t) => t !== tag)
+                                            : [...filter(), tag],
+                                    );
+                                }}
+                            >
+                                {tag}
+                            </div>
+                        );
+                    }}
+                </For>
+            </div>
+
             <div
-                class="col-auto grid h-3/5 w-9/12 grid-cols-3 grid-rows-2 content-center items-center justify-center justify-items-center gap-10 align-middle"
+                class="relative col-auto grid h-3/5 w-9/12 grid-cols-3 grid-rows-2 gap-10"
                 data-aos="fade-up-right"
             >
-                <For each={ProjectsData}>
+                <Show when={showHelp()}>
+                    <div class="animate-appears-and-bounce absolute -top-14 right-0 z-10 flex">
+                        <BsArrow90degDown class="pt-3 text-6xl text-white" />
+                        <p class="text-2xl">Hover here!</p>
+                    </div>
+                </Show>
+
+                <For each={projectData()}>
                     {(project) => (
                         <ProjectCard
                             {...project.card}
+                            hidden={
+                                filter().length > 0 &&
+                                !project.card.types.some((t) =>
+                                    filter().includes(t),
+                                )
+                            }
                             onMoreClick={() => openModal(project.modal)}
                         />
                     )}
@@ -96,6 +211,7 @@ export default function Projects(props) {
  * @param {string} props.imgSrc
  * @param {string} props.imgAlt
  * @param {string[]} props.types
+ * @param {boolean} props.hidden
  * @param {() => void} props.onMoreClick
  * @returns
  */
@@ -106,6 +222,7 @@ function ProjectCard(props) {
         <div
             class="card h-full w-full bg-[#18262E] shadow-xl"
             classList={{
+                hidden: props.hidden,
                 "image-full": showHover(),
             }}
             onMouseEnter={() => setShowHover(true)}
@@ -132,12 +249,10 @@ function ProjectCard(props) {
                     <p class="text-left text-lg font-semibold leading-tight text-white">
                         {props.content}
                     </p>
-                    <div class="w-full flex gap-2">
+                    <div class="flex w-full gap-2">
                         <For each={props.types}>
                             {(type) => (
-                                <div class="badge badge-primary">
-                                    {type}
-                                </div>
+                                <div class="badge badge-primary">{type}</div>
                             )}
                         </For>
                     </div>
@@ -306,7 +421,7 @@ function MoreProjectsModal(props) {
                 dialog = x;
             }}
         >
-            <div class="flex w-full flex-col gap-5">
+            <div class="flex w-full select-none flex-col gap-5">
                 <div class="carousel m-auto w-full">
                     <For each={MoreProjectsData}>
                         {(info, i) => (

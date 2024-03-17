@@ -42,7 +42,6 @@ function App() {
             () => targetIndex(),
             (index) => {
                 const el = elements[index];
-                // console.log(index, el);
                 window.scrollTo({
                     behavior: "smooth",
                     top: el.offsetTop,

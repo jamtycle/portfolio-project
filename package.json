@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@solid-primitives/scroll": "^2.0.23",
     "p5": "^1.9.1",
     "solid-icons": "^1.1.0",

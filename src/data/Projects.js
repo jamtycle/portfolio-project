@@ -199,6 +199,38 @@ export const ProjectsData = [
             ],
         },
     },
+    {
+        card: {
+            title: "RESTAURANT MANAGEMENT APP",
+            content:
+                "A tool that can recognize and count the amount of grape berries in a photo.",
+            imgSrc: "./img/capstone-2.png",
+            imgAlt: "conteo-ia",
+            types: ["Academic", "Backend", "Frontend", "Web", "Database"],
+        },
+        modal: {
+            title: "RESTAURANT MANAGEMENT APP",
+            content:
+                "For this project, the client required a tool that could recognize and count the amount of grape berries in a photo. I developed an AI model that can fit the requirement and integrated into a web application.",
+            carrousel: [
+                "/img/capstone-1.png",
+                "/img/capstone-2.png",
+                "/img/capstone-3.png",
+                "/img/capstone-4.png",
+            ],
+            techstack: [
+                {
+                    stackName: "Backend",
+                    techs: ["Python", "Flask", "Tensorflow"],
+                },
+                {
+                    stackName: "Frontend",
+                    techs: ["SolidJS", "TailwindCSS"],
+                },
+            ],
+        },
+    },
+    
 ];
 
 /**
