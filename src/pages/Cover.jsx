@@ -1,6 +1,5 @@
 import { onMount } from "solid-js";
-import TypeWriting from "../lib/TypeWriting";
-// import { FaSolidQuoteLeft, FaSolidQuoteRight } from "solid-icons/fa";
+import { descriptionAnimation, typeWriterAsync } from "../lib/TypeWriting.js";
 import "../assets/glitch.css";
 import "../assets/animations.css";
 
@@ -11,74 +10,54 @@ import "../assets/animations.css";
  * @returns
  */
 export default function Cover(props) {
-    // const [animFinished, setAnimFinished] = createSignal(false);
+    let title_name, aka, description;
 
     onMount(() => {
-        // setAnimFinished(false);
-        TypeWriting.indexAnimation(() => {
-            // setAnimFinished(true);
-        });
+        typeWriterAsync(title_name, 0);
+        typeWriterAsync(aka, 0);
+        descriptionAnimation(description);
     });
 
     return (
         <div
             ref={props.ref}
-            class="flex h-screen w-full select-none flex-col justify-center gap-14"
+            class="flex h-screen w-screen select-none flex-col justify-center gap-14"
             id="hero"
         >
-            <div class="grid w-full auto-rows-[minmax(0,_0.7fr)] content-center items-center justify-center">
-                <div class="flex w-full flex-row text-8xl">
-                    <span class="font-bold">[&nbsp;</span>
-                    <h1 class="w-full text-center font-bold" id="name" />
-                    <span class="font-bold">&nbsp;] </span>
-                </div>
-                <div
-                    class="flex flex-row justify-center opacity-30"
-                    id="aka-container"
-                />
-                {/* <div class="animate-alpha-slow mx-auto flex w-fit flex-col items-center justify-center py-5 align-middle text-base-content">
-                    <p class="relative whitespace-pre text-center text-xl italic">
-                        <FaSolidQuoteLeft class="absolute -left-14 top-1 h-12 w-12" />
-                        Scientists are the ones who ought to guide major
-                        decisions, with the help of macines.
-                        <FaSolidQuoteRight class="absolute -right-14 top-1 h-12 w-12" />
-                    </p>
-                    <p class="w-full text-right font-semibold text-white">
-                        Miguel Benasayag, The Tyranny of Algorithms
-                    </p>
-                </div> */}
-                <div class="flex flex-col justify-center" id="desc-container">
-                    <h2
-                        class="w-full text-center text-5xl font-semibold"
-                        id="desc"
+            <div class="flex w-full flex-col items-center justify-center gap-5 align-middle">
+                <div class="flex w-full flex-col content-center items-center justify-center">
+                    <div class="flex w-full flex-row justify-center text-4xl md:text-5xl lg:text-8xl">
+                        <span class="font-bold">[&nbsp;</span>
+                        <h1
+                            class=" overflow-hidden text-nowrap font-bold"
+                            typing-content="Bruno Ramirez"
+                            ref={title_name}
+                        />
+                        <span class="font-bold">&nbsp;] </span>
+                    </div>
+                    <p
+                        class="text-md flex flex-row justify-center text-xl opacity-50 md:text-3xl"
+                        typing-content="(&nbsp;Jamtycle&nbsp;)"
+                        ref={aka}
                     />
                 </div>
-                {/* <Show when={animFinished()}> */}
-                {/* <div class="animate-alpha-slow mx-auto flex w-fit flex-col items-center justify-center align-middle text-base-content py-5">
-                        <p class="relative whitespace-pre text-center text-xl italic">
-                            <FaSolidQuoteLeft class="absolute -left-14 top-1 h-12 w-12" />
-                            Scientists are the ones who ought to guide
-                            major decisions, with the help of macines.
-                            <FaSolidQuoteRight class="absolute -right-14 top-1 h-12 w-12" />
-                        </p>
-                        <p class="w-full text-right font-semibold text-white">
-                            Miguel Benasayag, The Tyranny of Algorithms
-                        </p>
-                    </div> */}
-                {/* </Show> */}
+                <div class="flex h-[1.3em] flex-col justify-center">
+                    <h2
+                        class="w-full text-center text-2xl font-semibold md:text-3xl lg:text-5xl"
+                        ref={description}
+                    />
+                </div>
             </div>
-            <div
-                class="flex w-full items-center justify-center align-middle"
-                id="desc-container"
-            >
+            <div class="flex w-full items-center justify-center align-middle">
                 <a
-                    class="glitch layers animate-alpha btn btn-outline btn-primary hero btn-lg flex w-fit items-center justify-center rounded-none border-4 py-2 align-middle"
-                    // onClick={() => console.log(window.scrollTo({ behavior: "smooth"}))}
+                    class="glitch layers animate-alpha btn btn-outline btn-primary hero btn-lg flex w-2/3 items-center justify-center rounded-none border-4 py-2 align-middle md:w-fit"
                     onClick={() => props.nextTarget()}
                     id="more"
                     data-text="AND MORE"
                 >
-                    <span class="ml-3 h-full text-4xl">AND MORE</span>
+                    <span class="my-auto ml-3 h-fit text-nowrap text-2xl md:text-4xl">
+                        AND MORE
+                    </span>
                 </a>
             </div>
         </div>

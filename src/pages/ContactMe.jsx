@@ -21,14 +21,14 @@ export default function ContactMe(props) {
     return (
         <div
             ref={props.ref}
-            class="flex h-screen w-full select-none flex-col items-center justify-center gap-12"
+            class="flex h-screen w-screen select-none flex-col items-center justify-center gap-12"
             id="contact"
         >
-            <h3 class="text-6xl font-bold" data-aos="fade-down">
-                CONTACT ME
+            <h3 class="text-4xl font-bold md:text-6xl" data-aos="fade-down">
+                &lt; CONTACT ME &gt;
             </h3>
             <div
-                class="flex h-3/5 w-3/5 flex-col items-center gap-5"
+                class="flex w-[90%] flex-col items-center gap-5 md:h-3/5 md:w-3/5"
                 data-aos="fade-up-right"
             >
                 <IconRow />
@@ -40,12 +40,12 @@ export default function ContactMe(props) {
 
 function IconRow() {
     return (
-        <div class="grid max-w-xl grid-cols-4 text-base">
+        <div class="grid w-full grid-cols-4 text-xs md:max-w-xl md:text-base">
             <div
-                class="link-primary tooltip flex flex-col items-center hover:text-white"
+                class="link-primary tooltip flex flex-col items-center gap-2 hover:text-white md:gap-0"
                 data-tip="Living the dream 🇨🇦"
             >
-                <HiOutlineMapPin class="h-14 w-14" />
+                <HiOutlineMapPin class="h-10 w-10 md:h-14 md:w-14" />
                 <p class="self-end font-semibold">Toronto, Canada</p>
             </div>
             <div
@@ -53,32 +53,32 @@ function IconRow() {
                 data-tip="Get my resume for free! (this one time 😉)"
             >
                 <a
-                    class="link-primary flex flex-col items-center hover:text-white"
+                    class="link-primary flex flex-col items-center gap-2 hover:text-white md:gap-0"
                     href="./pdf/bruno-ramirez-resume.pdf"
                     target="_blank"
                 >
-                    <HiOutlineNewspaper class="h-14 w-14" />
+                    <HiOutlineNewspaper class="h-10 w-10 md:h-14 md:w-14" />
                     <p class="font-semibold">Resume</p>
                 </a>
             </div>
             <div class="tooltip" data-tip="Check my repos 😳">
                 <a
-                    class="link-primary flex flex-col items-center hover:text-white"
+                    class="link-primary flex flex-col items-center gap-2 hover:text-white md:gap-0"
                     href="https://github.com/jamtycle"
                     target="_blank"
                 >
-                    <FiGithub class="h-14 w-14 py-2" />
+                    <FiGithub class="h-10 w-10 py-1 md:h-14 md:w-14 md:py-2" />
                     <p class="font-semibold">Github</p>
                 </a>
             </div>
             <div class="tooltip" data-tip="Call me maybe 🤙">
                 <a
-                    class="link-primary flex flex-col items-center hover:text-white"
+                    class="link-primary flex flex-col items-center gap-2 hover:text-white md:gap-0"
                     href="tel:+16479940631"
                     target="_blank"
                 >
-                    <HiOutlineDevicePhoneMobile class="h-14 w-14 py-1.5" />
-                    <p class="font-semibold">(647) 994-0631</p>
+                    <HiOutlineDevicePhoneMobile class="h-10 w-10 py-0.5 md:h-14 md:w-14 md:py-1.5" />
+                    <p class="font-semibold">&#40;647&#41; 994-0631</p>
                 </a>
             </div>
         </div>
@@ -166,14 +166,15 @@ function ContactForm() {
 
     return (
         <form
-            class="flex max-w-2xl flex-col justify-center gap-8"
+            class="flex max-sm:w-full max-w-full flex-col justify-center gap-8 md:max-w-2xl"
             onSubmit={(e) => {
                 handleSubmit(e);
                 e.preventDefault();
             }}
         >
             <div class="flex w-full flex-col gap-4">
-                <div class="join">
+                {/* flex flex-col gap-4  */}
+                <div class="md:join max-md:flex max-md:flex-col max-md:gap-4">
                     <label class="input join-item input-bordered flex items-center gap-2">
                         <HiOutlineIdentification class="h-fit" />
                         <input

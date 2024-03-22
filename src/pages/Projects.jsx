@@ -97,7 +97,7 @@ export default function Projects(props) {
     return (
         <artice
             ref={props.ref}
-            class="relative flex h-screen w-full select-none flex-col items-center justify-center gap-9 align-middle"
+            class="relative flex h-screen w-screen select-none flex-col items-center justify-center gap-9 align-middle"
             id="projects"
         >
             <div
@@ -122,7 +122,7 @@ export default function Projects(props) {
             />
 
             <h3
-                class="col-span-2 col-start-1 row-start-1 text-center text-6xl font-bold"
+                class="text-center text-4xl font-bold md:text-6xl"
                 onClick={() => setEasterEggClicks(easterEggClicks() + 1)}
                 data-tip={eEToolTip()}
                 classList={{
@@ -133,9 +133,9 @@ export default function Projects(props) {
                     "btn-lg": easterEggClicks() > 0,
                 }}
             >
-                PROJECTS
+                &lt; PROJECTS &gt;
             </h3>
-            <div class="flex gap-3">
+            <div class="hidden gap-3 md:flex">
                 <For each={type_tags}>
                     {(tag) => {
                         const [tagShow, setTagShow] = createSignal(true);
@@ -167,7 +167,7 @@ export default function Projects(props) {
             </div>
 
             <div
-                class="relative col-auto grid h-3/5 w-9/12 grid-cols-3 grid-rows-2 gap-10"
+                class="relative col-auto grid h-3/5 w-10/12 grid-cols-2 grid-rows-3 gap-10 md:w-9/12 lg:grid-cols-3 lg:grid-rows-2"
                 data-aos="fade-up-right"
             >
                 <Show when={showHelp()}>
@@ -244,21 +244,25 @@ function ProjectCard(props) {
                 </Show>
             </figure>
             <Show when={showHover()}>
-                <div class="card-body gap-5">
-                    <h2 class="card-title text-white">{props.title}</h2>
-                    <p class="text-left text-lg font-semibold leading-tight text-white">
+                <div class="card-body gap-0 md:gap-5">
+                    <h2 class="card-title text-xs text-white md:text-lg 2xl:text-2xl">
+                        {props.title}
+                    </h2>
+                    <p class="text-left text-xs font-semibold leading-tight text-white md:text-base 2xl:text-xl">
                         {props.content}
                     </p>
-                    <div class="flex w-full gap-2">
+                    <div class="flex w-full gap-2 overflow-hidden">
                         <For each={props.types}>
                             {(type) => (
-                                <div class="badge badge-primary">{type}</div>
+                                <div class="badge badge-primary badge-xs md:badge-md lg:badge-sm 2xl:badge-lg">
+                                    {type}
+                                </div>
                             )}
                         </For>
                     </div>
                     <div class="card-actions justify-end">
                         <button
-                            class="btn btn-primary btn-block text-lg uppercase"
+                            class="btn btn-primary btn-xs btn-block text-lg uppercase md:btn-sm"
                             onClick={() => props.onMoreClick()}
                         >
                             see more

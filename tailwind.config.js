@@ -14,9 +14,9 @@ export default {
                 sunset: {
                     ...theme["sunset"],
                     "base-100": "#1A1A1A",
-                    "accent": "#1A1918"
-                }
-            }
+                    accent: "#1A1918",
+                },
+            },
         ],
     },
 };

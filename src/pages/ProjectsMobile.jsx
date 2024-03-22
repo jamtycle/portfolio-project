@@ -1,0 +1,131 @@
+import { Show, For } from "solid-js";
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "solid-icons/hi";
+import { ProjectsData } from "../data/Projects";
+/**
+ * @param {Object} props
+ * @param {import("solid-js").Ref<HTMLDivElement>} props.ref
+ * @returns
+ */
+export default function ProjectsMobile(props) {
+    return (
+        <artice
+            ref={props.ref}
+            class="relative flex h-full w-screen select-none flex-col items-center justify-center gap-9 align-middle"
+        >
+            <h3 class="text-center text-4xl font-bold md:text-6xl">
+                &lt; PROJECTS &gt;
+            </h3>
+
+            <div class="flex w-10/12 flex-col md:w-9/12">
+                <div class="carousel w-full gap-5">
+                    <For each={ProjectsData}>
+                        {(project, i) => (
+                            <ProjectCard
+                                i={i()}
+                                id={`project_${i()}`}
+                                project={project}
+                            />
+                        )}
+                    </For>
+                </div>
+            </div>
+        </artice>
+    );
+}
+
+/**
+ * @param {object} props
+ * @param {number} props.i
+ * @param {string} props.id
+ * @param {import("../data/Projects").Project} props.project
+ * @returns
+ */
+function ProjectCard(props) {
+    return (
+        <div id={props.id} class="carousel-item w-full">
+            <div class="flex h-fit w-full flex-col gap-5 py-3">
+                <h2 class="w-full text-center text-xl font-bold text-white md:text-lg">
+                    {`${props.i + 1}. ${props.project.card.title}`}
+                </h2>
+                <figure class="mx-auto flex h-full w-full">
+                    <Show when={props.i !== 0}>
+                        <a
+                            href={`#project_${props.i - 1}`}
+                            class="btn btn-circle btn-ghost btn-sm my-auto"
+                        >
+                            <HiOutlineChevronLeft class="h-8 w-8" />
+                        </a>
+                    </Show>
+                    <div class="carousel h-full rounded-box">
+                        <For
+                            each={[
+                                props.project.card.imgSrc,
+                                ...props.project.modal.carrousel,
+                            ]}
+                        >
+                            {(imgSrc) => (
+                                <div class="carousel-item w-full">
+                                    <img
+                                        src={imgSrc}
+                                        class="aspect-video h-full w-fit object-cover object-center"
+                                        alt={props.project.card.imgAlt}
+                                    />
+                                </div>
+                            )}
+                        </For>
+                    </div>
+                    <Show when={props.i < ProjectsData.length - 1}>
+                        <a
+                            href={`#project_${props.i + 1}`}
+                            class="btn btn-circle btn-ghost btn-sm my-auto"
+                        >
+                            <HiOutlineChevronRight class="h-8 w-8" />
+                        </a>
+                    </Show>
+                </figure>
+                <div class="flex flex-col gap-4">
+                    <div class="flex w-full flex-wrap gap-2">
+                        <For each={props.project.card.types}>
+                            {(type) => (
+                                <div class="badge badge-primary badge-outline badge-md">
+                                    {type}
+                                </div>
+                            )}
+                        </For>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-4">
+                            <h3 class="text-lg font-bold">Tech Stack</h3>
+                            <div class="flex flex-col gap-3 whitespace-break-spaces text-wrap">
+                                <For each={props.project.modal.techstack}>
+                                    {(stack) => (
+                                        <div class="flex flex-col gap-1">
+                                            <h4 class="text-base font-semibold">
+                                                {stack.stackName}
+                                            </h4>
+                                            <ul class="list-inside list-disc">
+                                                <For each={stack.techs}>
+                                                    {(tech) => (
+                                                        <li class="list-item text-base">
+                                                            {tech}
+                                                        </li>
+                                                    )}
+                                                </For>
+                                            </ul>
+                                        </div>
+                                    )}
+                                </For>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <h3 class="text-lg font-bold">About the project</h3>
+                            <p class="h-full overflow-y-auto text-base">
+                                {props.project.modal.content}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

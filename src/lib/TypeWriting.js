@@ -1,143 +1,60 @@
+const MIN_SPEED = 50;
+const MAX_SPEED = 100;
+
 /**
- * @param {() => void} _on_finish
+ * @param {HTMLElement} _element
  */
-function indexAnimation(_on_finish) {
-    typeWriter(
-        "#name",
-        "Bruno Ramirez",
-        0,
-        50,
-        100,
-        () => {
-            document.querySelector("#aka-container").innerHTML =
-                `<div class="flex flex-row justify-center">
-                    <span class="text-2xl">(&nbsp;</span>
-                    <h3 class="text-center text-2xl" id="aka">
-                        Jamtycle
-                    </h3>
-                    <span class="text-2xl">&nbsp;)</span>
-                </div>`;
-            typeWriter(
-                "#aka",
-                "Jamtycle",
-                0,
-                50,
-                100,
-                () => {
-                    typeWriter(
-                        "#desc",
-                        "Frontend...",
-                        0,
-                        50,
-                        300,
-                        () => {
-                            reverseTypeWriter(
-                                "#desc",
-                                50,
-                                300,
-                                () => {
-                                    typeWriter(
-                                        "#desc",
-                                        "Backend...",
-                                        0,
-                                        50,
-                                        300,
-                                        () => {
-                                            reverseTypeWriter(
-                                                "#desc",
-                                                50,
-                                                300,
-                                                () => {
-                                                    typeWriter(
-                                                        "#desc",
-                                                        "FULL STACK",
-                                                        0,
-                                                        50,
-                                                        100,
-                                                        () => {
-                                                            reverseTypeWriter(
-                                                                "#desc",
-                                                                50,
-                                                                300,
-                                                                () => {
-                                                                    typeWriter(
-                                                                        "#desc",
-                                                                        "Software Developer",
-                                                                        0,
-                                                                        50,
-                                                                        50,
-                                                                        () => {
-                                                                            _on_finish();
-                                                                            // document
-                                                                            //     .querySelector(
-                                                                            //         "#more",
-                                                                            //     )
-                                                                            //     .classList.replace(
-                                                                            //         "opacity-0",
-                                                                            //         "animate-alpha",
-                                                                            //     );
-                                                                        },
-                                                                        100,
-                                                                    );
-                                                                },
-                                                                400,
-                                                            );
-                                                        },
-                                                        400,
-                                                    );
-                                                },
-                                                400,
-                                            );
-                                        },
-                                        500,
-                                    );
-                                },
-                                400,
-                            );
-                        },
-                        1000,
-                    );
-                },
-                100,
-            );
-        },
-        100,
-    );
+async function descriptionAnimation(_element) {
+    const content = [
+        "Frontend...",
+        "Backend...",
+        "FULL STACK",
+        "Software Developer",
+    ];
+
+    for (let i = 0; i < content.length; i++) {
+        const str = content[i];
+        _element.setAttribute("typing-content", str);
+        await typeWriterAsync(_element, 0, random(1000, 2000));
+        if (i === content.length - 1) break;
+        await reverseTypeWriter(_element);
+    }
 }
 
-function reverseTypeWriter(
-    _element,
-    _speed_min,
-    _speed_max,
-    _on_finish,
-    _on_finish_delay,
-) {
-    _element =
-        typeof _element === "string"
-            ? document.querySelector(_element)
-            : _element;
-    if (_element.innerHTML.length <= 0) {
-        if (_on_finish) setTimeout(_on_finish, _on_finish_delay);
+/**
+ * @param {HTMLElement} _element
+ * @param {() => void} _on_finish
+ * @param {number} _on_finish_delay
+ * @returns
+ */
+async function reverseTypeWriter(_element, _on_finish, _on_finish_delay) {
+    if (_element.innerText.length <= 0) {
+        if (!_on_finish) return;
+        await new Promise((resolve) =>
+            setTimeout(_on_finish(resolve), _on_finish_delay),
+        );
         return;
     }
 
-    _element.innerHTML = _element.innerHTML.substring(
-        0,
-        _element.innerHTML.length - 1,
-    );
-    setTimeout(
-        () =>
-            reverseTypeWriter(
-                _element,
-                _speed_min,
-                _speed_max,
-                _on_finish,
-                _on_finish_delay,
-            ),
-        random(_speed_min, _speed_max),
-    );
+    const content = _element.innerText;
+    _element.innerText = content.substring(0, content.length - 1);
+
+    const speed = random(MIN_SPEED, MAX_SPEED);
+    await new Promise((resolve) => setTimeout(resolve, speed));
+    await reverseTypeWriter(_element, _on_finish, _on_finish_delay);
 }
 
+/**
+ *
+ * @param {HTMLElement} _element
+ * @param {string} _sentence
+ * @param {number} _n
+ * @param {number} _speed_min
+ * @param {number} _speed_max
+ * @param {() => void} _on_finish
+ * @param {number} _on_finish_delay
+ * @returns
+ */
 function typeWriter(
     _element,
     _sentence,
@@ -168,10 +85,30 @@ function typeWriter(
     );
 }
 
+/**
+ * @param {HTMLElement} _element
+ * @param {number} _current
+ * @param {number} _finish_delay
+ * @returns
+ */
+async function typeWriterAsync(_element, _current, _finish_delay = 0) {
+    const sentence = _element.getAttribute("typing-content");
+
+    if (_current >= sentence.length) {
+        await new Promise((resolve) => setTimeout(resolve, _finish_delay));
+        return;
+    }
+
+    _element.innerText = sentence.substring(0, ++_current);
+
+    const speed = random(MIN_SPEED, MAX_SPEED);
+
+    await new Promise((resolve) => setTimeout(resolve, speed));
+    await typeWriterAsync(_element, _current, _finish_delay);
+}
+
 function random(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-export default {
-    indexAnimation,
-};
+export { descriptionAnimation, typeWriter, typeWriterAsync };
