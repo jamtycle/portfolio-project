@@ -25,12 +25,12 @@ export default function AboutMe(props) {
                 &lt; ABOUT ME &gt;
             </h3>
             <div
-                class="flex w-full flex-col items-center gap-8 md:w-[65%] md:gap-10 lg:flex-row"
+                class="flex w-full flex-col items-center gap-8 md:w-[65%] md:gap-10 xl:flex-row"
                 data-aos="fade-up-right"
             >
                 <div class="flex flex-col items-center gap-4 md:gap-10">
                     <img
-                        class="aspect-square w-[60%] rounded-full md:w-[80%] lg:w-full"
+                        class="aspect-square w-[50%] rounded-full md:w-[60%] xl:w-full"
                         src="./img/me.jpg"
                     />
                     <div class="animate-alpha-slow mx-auto flex w-fit flex-col items-center justify-center align-middle text-base-content">

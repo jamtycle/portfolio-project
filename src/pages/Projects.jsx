@@ -19,6 +19,8 @@ const type_tags = [
     "Academic",
 ].sort();
 
+let any_hover = false;
+
 /**
  * @param {Object} props
  * @param {import("solid-js").Ref<HTMLDivElement>} props.ref
@@ -53,6 +55,7 @@ export default function Projects(props) {
     createEffect(() => {
         if (props.targetIndex() !== 2) return;
         setTimeout(() => {
+            if (any_hover) return;
             setShowHelp(true);
             setTimeout(() => setShowHelp(false), 12000);
         }, 8000);
@@ -173,7 +176,7 @@ export default function Projects(props) {
                 <Show when={showHelp()}>
                     <div class="animate-appears-and-bounce absolute -top-14 right-0 z-10 flex">
                         <BsArrow90degDown class="pt-3 text-6xl text-white" />
-                        <p class="text-2xl">Hover here!</p>
+                        <p class="text-2xl">Hover me!</p>
                     </div>
                 </Show>
 
@@ -218,6 +221,14 @@ export default function Projects(props) {
 function ProjectCard(props) {
     const [showHover, setShowHover] = createSignal(false);
 
+    createEffect(
+        on(
+            () => showHover(),
+            () => (any_hover = true),
+            { defer: true },
+        ),
+    );
+
     return (
         <div
             class="card h-full w-full bg-[#18262E] shadow-xl"
@@ -228,7 +239,7 @@ function ProjectCard(props) {
             onMouseEnter={() => setShowHover(true)}
             onMouseLeave={() => setShowHover(false)}
         >
-            <figure class="h-full w-full">
+            <figure class="h-full !max-h-full w-full !max-w-full">
                 <Show
                     when={props.imgSrc}
                     fallback={
@@ -237,21 +248,21 @@ function ProjectCard(props) {
                 >
                     <img
                         class="h-full w-full rounded-2xl object-cover object-center"
-                        classList={{ "blur-lg": showHover() }}
+                        classList={{ "blur-sm": showHover() }}
                         src={props.imgSrc}
                         alt={props.imgAlt}
                     />
                 </Show>
             </figure>
             <Show when={showHover()}>
-                <div class="card-body gap-0 md:gap-5">
-                    <h2 class="card-title text-xs text-white md:text-lg 2xl:text-2xl">
+                <div class="card-body h-full !max-h-full w-full !max-w-full gap-0 p-1 md:gap-2 md:p-4 2xl:p-8">
+                    <h2 class="card-title text-xs text-white md:text-base 2xl:text-2xl">
                         {props.title}
                     </h2>
-                    <p class="text-left text-xs font-semibold leading-tight text-white md:text-base 2xl:text-xl">
+                    <p class="whitespace-pre-line text-left text-xs font-semibold leading-tight text-white md:text-sm 2xl:text-xl">
                         {props.content}
                     </p>
-                    <div class="flex w-full gap-2 overflow-hidden">
+                    <div class="flex w-full flex-wrap gap-2 overflow-hidden">
                         <For each={props.types}>
                             {(type) => (
                                 <div class="badge badge-primary badge-xs md:badge-md lg:badge-sm 2xl:badge-lg">
@@ -262,7 +273,7 @@ function ProjectCard(props) {
                     </div>
                     <div class="card-actions justify-end">
                         <button
-                            class="btn btn-primary btn-xs btn-block text-lg uppercase md:btn-sm"
+                            class="btn btn-primary btn-xs btn-block text-base uppercase md:btn-sm"
                             onClick={() => props.onMoreClick()}
                         >
                             see more

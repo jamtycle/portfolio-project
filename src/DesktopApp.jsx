@@ -101,11 +101,11 @@ function DesktopApp() {
             </div>
 
             <div class="fixed right-10 top-[34%] hidden select-none md:inline-block">
-                <ul class="steps steps-vertical text-white">
+                <ul class="md:text-md steps steps-vertical text-xs text-white 2xl:text-base">
                     <For each={["Cover", "About me", "Projects", "Contact me"]}>
                         {(item, i) => (
                             <li
-                                class="step cursor-pointer font-semibold"
+                                class="step cursor-pointer font-semibold md:after:!h-7 md:after:!w-7 2xl:after:!h-9 2xl:after:!w-9"
                                 classList={{
                                     "step-primary": targetIndex() >= i(),
                                 }}

@@ -1,3 +1,5 @@
+[![pages-build-deployment](https://github.com/jamtycle/portfolio-project/actions/workflows/pages/pages-build-deployment/badge.svg?branch=pages)](https://github.com/jamtycle/portfolio-project/actions/workflows/pages/pages-build-deployment)
+
 ## Usage
 
 ```bash

@@ -105,7 +105,7 @@ export const ProjectsData = [
     {
         card: {
             title: "DESKTOP APP MANAGER",
-            content: "Desktop app manager for Agrosoft's applications.",
+            content: "Desktop app manager for Agrosoft's\napplications.",
             imgSrc: "./img/fito-updater.png",
             imgAlt: "Desktop app manager",
             types: ["Database", "Backend", "Frontend", "Web", "Desktop"],
@@ -130,7 +130,7 @@ export const ProjectsData = [
                 },
                 {
                     stackName: "Frontend",
-                    techs: ["Vue.js"],
+                    techs: ["React", "TailwindCSS"],
                 },
             ],
         },
@@ -194,7 +194,7 @@ export const ProjectsData = [
                 },
                 {
                     stackName: "Frontend",
-                    techs: ["SolidJS", "TailwindCSS"],
+                    techs: ["React", "TailwindCSS"],
                 },
             ],
         },
@@ -230,7 +230,6 @@ export const ProjectsData = [
             ],
         },
     },
-    
 ];
 
 /**
